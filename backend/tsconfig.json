@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    /* 🗂️ Cấu hình thư mục nguồn và đầu ra */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* ⚙️ Môi trường Node.js */
+    "types": ["node", "uuid"],
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "types": ["node"],
+
+    /* 🧠 Kiểm tra & Type an toàn */
+    "strict": true,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* 📍 Map hỗ trợ debug */
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
