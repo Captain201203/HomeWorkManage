@@ -1,31 +1,27 @@
 {
   "compilerOptions": {
-    /* 🗂️ Cấu hình thư mục nguồn và đầu ra */
     "rootDir": "./src",
     "outDir": "./dist",
 
-    /* ⚙️ Môi trường Node.js */
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "lib": ["ES2022"],
     
-    /* 🛠️ QUAN TRỌNG: Để trống hoặc liệt kê đủ để TS tự quét @types */
-    "types": ["node", "express", "cors", "multer", "bcrypt"], 
+    /* 🛠️ CHỈNH SỬA Ở ĐÂY: Xóa các thư viện cụ thể, chỉ để lại "node" 
+       TypeScript sẽ tự động quét mọi thứ trong node_modules/@types */
+    "types": ["node"], 
 
-    /* 🧠 Kiểm tra & Type an toàn */
     "strict": true,
-    "skipLibCheck": true, // Giúp bỏ qua lỗi định nghĩa từ thư viện bên thứ 3
+    "skipLibCheck": true, 
     "noImplicitAny": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
 
-    /* 📍 Map hỗ trợ debug */
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
     
-    /* 🏠 Path Mapping (Nếu bạn dùng alias) */
     "baseUrl": ".",
     "typeRoots": ["./node_modules/@types"]
   },
