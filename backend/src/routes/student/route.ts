@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express'; // Import thêm Request và Response
 import { studentController } from '../../controllers/student/controller.js';
 
 class StudentRouter {
@@ -10,22 +10,23 @@ class StudentRouter {
     }
 
     private initializeRoutes() {
+        // Thêm kiểu dữ liệu (req: Request, res: Response) để fix lỗi TS7006
+        
         // Lấy danh sách sinh viên
-        this.router.get('/', (req, res) => studentController.getAll(req, res));
+        this.router.get('/', (req: Request, res: Response) => studentController.getAll(req, res));
 
         // Lấy chi tiết 1 sinh viên
-        this.router.get('/:id', (req, res) => studentController.getById(req, res));
+        this.router.get('/:id', (req: Request, res: Response) => studentController.getById(req, res));
 
         // Tạo sinh viên mới
-        this.router.post('/', (req, res) => studentController.create(req, res));
+        this.router.post('/', (req: Request, res: Response) => studentController.create(req, res));
 
         // Cập nhật sinh viên
-        this.router.put('/:id', (req, res) => studentController.update(req, res));
+        this.router.put('/:id', (req: Request, res: Response) => studentController.update(req, res));
 
         // Xóa sinh viên
-        this.router.delete('/:id', (req, res) => studentController.delete(req, res));
+        this.router.delete('/:id', (req: Request, res: Response) => studentController.delete(req, res));
     }
 }
 
-// Export instance của router
 export const studentRouter = new StudentRouter().router;

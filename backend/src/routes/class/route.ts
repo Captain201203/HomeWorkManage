@@ -1,7 +1,5 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express'; // Thêm Request và Response
 import { classController } from '../../controllers/class/controller.js';
-
-
 
 class ClassRouter {
     public router: Router;
@@ -12,24 +10,22 @@ class ClassRouter {
     }
 
     private initializeRoutes() {
-        // Lấy danh sách sinh viên
-        this.router.get('/', (req, res) => classController.getAll(req, res));
+        // Gán kiểu Request, Response cho các callback để tránh lỗi 'any'
+        this.router.get('/', (req: Request, res: Response) => classController.getAll(req, res));
 
-        // Lấy chi tiết 1 sinh viên
-        this.router.get('/:id', (req, res) => classController.getById(req, res));
+        this.router.get('/:id', (req: Request, res: Response) => classController.getById(req, res));
 
-        // Tạo sinh viên mới
-        this.router.post('/', (req, res) => classController.create(req, res));
+        this.router.post('/', (req: Request, res: Response) => classController.create(req, res));
 
-        // Cập nhật sinh viên
-        this.router.put('/:id', (req, res) => classController.update(req, res));
+        this.router.put('/:id', (req: Request, res: Response) => classController.update(req, res));
 
-        // Xóa sinh viên
-        this.router.delete('/:id', (req, res) => classController.delete(req, res));
-        this.router.get('/count/:classId', (req, res) => classController.countStudentsInClass(req, res));
-        this.router.delete('/deleteAllInClass/:classId', (req, res) => classController.deleteAllInClass(req, res));
+        this.router.delete('/:id', (req: Request, res: Response) => classController.delete(req, res));
+        
+        // Các route bổ sung
+        this.router.get('/count/:classId', (req: Request, res: Response) => classController.countStudentsInClass(req, res));
+        
+        this.router.delete('/deleteAllInClass/:classId', (req: Request, res: Response) => classController.deleteAllInClass(req, res));
     }
 }
 
-// Export instance của router
 export const classRouter = new ClassRouter().router;
