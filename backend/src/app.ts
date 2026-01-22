@@ -6,7 +6,7 @@ import { classRouter } from './routes/class/route.js';
 import { adminRouter } from './routes/admin/route.js';
 import { teacherRouter } from './routes/teacher/route.js';
 // Load environment variables
-dotenv.config({ path: '.env.local' });
+dotenv.config();
 
 const app: Express = express();
 
