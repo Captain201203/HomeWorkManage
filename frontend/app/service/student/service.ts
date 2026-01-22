@@ -4,12 +4,14 @@ import { IStudent } from "@/app/types/student/type.js";
 
 class StudentService {
     
-    private readonly baseUrl: string;
+    private readonly apiBase: string; 
+    private readonly endpoint: string; 
 
     constructor() {
-       
-        this.baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/students';
+        this.apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+        this.endpoint = `${this.apiBase}/api/students`;
     }
+
 
    
     private async handleResponse<T>(response: Response): Promise<T> {
@@ -22,7 +24,7 @@ class StudentService {
 
    
     public async getAll(): Promise<IStudent[]> {
-        const res = await fetch(this.baseUrl, { 
+        const res = await fetch(this.endpoint, { 
             cache: 'no-store',
             method: 'GET'
         });
@@ -30,8 +32,8 @@ class StudentService {
     }
 
   
-    public async getById(id: string): Promise<IStudent> {
-        const res = await fetch(`${this.baseUrl}/${id}`, {
+    public async getById(studentId: string): Promise<IStudent> {
+        const res = await fetch(`${this.endpoint}/${studentId}`, {
             method: 'GET'
         });
         return this.handleResponse<IStudent>(res);
@@ -39,7 +41,7 @@ class StudentService {
 
 
     public async create(data: Omit<IStudent, '_id'>): Promise<IStudent> {
-        const res = await fetch(this.baseUrl, {
+        const res = await fetch(this.endpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
@@ -48,8 +50,8 @@ class StudentService {
     }
 
   
-    public async update(id: string, data: Partial<IStudent>): Promise<IStudent> {
-        const res = await fetch(`${this.baseUrl}/${id}`, {
+    public async update(studentId: string, data: Partial<IStudent>): Promise<IStudent> {
+        const res = await fetch(`${this.endpoint}/${studentId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
@@ -58,8 +60,8 @@ class StudentService {
     }
 
 
-    public async delete(id: string): Promise<{ success: boolean; message?: string }> {
-        const res = await fetch(`${this.baseUrl}/${id}`, {
+    public async delete(studentId: string): Promise<{ success: boolean; message?: string }> {
+        const res = await fetch(`${this.endpoint}/${studentId}`, {
             method: 'DELETE'
         });
         return this.handleResponse(res);
