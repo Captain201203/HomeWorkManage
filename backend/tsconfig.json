@@ -5,16 +5,17 @@
     "outDir": "./dist",
 
     /* ⚙️ Môi trường Node.js */
-    "types": ["node", "uuid"],
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "lib": ["ES2022"],
-    "types": ["node"],
+    
+    /* 🛠️ QUAN TRỌNG: Để trống hoặc liệt kê đủ để TS tự quét @types */
+    "types": ["node", "express", "cors", "multer", "bcrypt"], 
 
     /* 🧠 Kiểm tra & Type an toàn */
     "strict": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true, // Giúp bỏ qua lỗi định nghĩa từ thư viện bên thứ 3
     "noImplicitAny": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -22,8 +23,12 @@
     /* 📍 Map hỗ trợ debug */
     "sourceMap": true,
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    
+    /* 🏠 Path Mapping (Nếu bạn dùng alias) */
+    "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types"]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
