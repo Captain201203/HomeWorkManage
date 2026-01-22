@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { studentRouter } from './routes/student/route.js';
 import { classRouter } from './routes/class/route.js';
-import { adminRouter } from './routes/admin/route.js';
+// import { adminRouter } from './routes/admin/route.js';
 import { teacherRouter } from './routes/teacher/route.js';
 // Load environment variables
 dotenv.config();
@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/api/students', studentRouter);
 app.use('/api/classes', classRouter);
-app.use('/api/admins', adminRouter);
+// app.use('/api/admins', adminRouter);
 app.use('/api/teachers', teacherRouter);
 
 // Health check endpoint
