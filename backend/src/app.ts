@@ -5,6 +5,8 @@ import { studentRouter } from './routes/student/route.js';
 import { classRouter } from './routes/class/route.js';
 // import { adminRouter } from './routes/admin/route.js';
 import { teacherRouter } from './routes/teacher/route.js';
+import { majorRouter } from './routes/major/route.js';
+import { accountRouter } from './routes/account/route.js';
 // Load environment variables
 dotenv.config();
 
@@ -20,6 +22,8 @@ app.use('/api/students', studentRouter);
 app.use('/api/classes', classRouter);
 // app.use('/api/admins', adminRouter);
 app.use('/api/teachers', teacherRouter);
+app.use('/api/majors', majorRouter);
+app.use('/api/accounts', accountRouter);
 
 // Health check endpoint
 app.get('/health', (req: Request, res: Response) => {
