@@ -78,7 +78,7 @@ export default function StudentListPage() {
               <p className="text-muted-foreground">Quản lý và theo dõi danh sách sinh viên trong hệ thống.</p>
             </div>
             <Button asChild className="bg-teal-600 hover:bg-teal-700 shadow-md">
-              <Link href="/students/new">
+              <Link href="/page/students/new">
                 <Plus className="mr-2 h-4 w-4" /> Add Student
               </Link>
             </Button>

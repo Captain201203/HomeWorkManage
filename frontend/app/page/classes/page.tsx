@@ -82,7 +82,7 @@ export default function ClassesPage() {
             <p className="text-muted-foreground mt-1">Quản lý chuyên ngành và giảng viên phụ trách lớp học.</p>
           </div>
           <Button asChild className="bg-teal-600 hover:bg-teal-700 shadow-md">
-            <Link href="/classes/new">
+            <Link href="/page/classes/new">
               <Plus className="w-4 h-4 mr-2" /> Create New Class
             </Link>
           </Button>
