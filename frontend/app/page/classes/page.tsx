@@ -17,7 +17,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 // Component dùng chung
-import { Sidebar } from "../../app/components/dasboard/sidebar";
+import { Sidebar } from "../../components/dasboard/sidebar";
 
 // API Service & Types
 import { classService } from "@/app/service/class/service"; 

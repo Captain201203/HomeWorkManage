@@ -1,28 +1,15 @@
 // src/services/studentService.ts
 
 import { IStudent } from "@/app/types/student/type.js";
+import { BaseApiService } from "../baseApi/service";
 
-class StudentService {
+class StudentService extends BaseApiService {
     
-    private readonly apiBase: string; 
-    private readonly endpoint: string; 
-
     constructor() {
-        this.apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-        this.endpoint = `${this.apiBase}/api/students`;
+        super('students');
+
     }
 
-
-   
-    private async handleResponse<T>(response: Response): Promise<T> {
-        if (!response.ok) {
-            const error = await response.json().catch(() => ({}));
-            throw new Error(error.message || `HTTP Error: ${response.status}`);
-        }
-        return response.json();
-    }
-
-   
     public async getAll(): Promise<IStudent[]> {
         const res = await fetch(this.endpoint, { 
             cache: 'no-store',

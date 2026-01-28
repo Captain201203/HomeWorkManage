@@ -1,21 +1,14 @@
 import { IClass } from "@/app/types/class/type";
+import { BaseApiService } from "../baseApi/service";
 
-class ClassService{
-    private readonly apiBase: string; 
-    private readonly endpoint: string; 
+class ClassService extends BaseApiService {
+
 
     constructor() {
-        this.apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-        this.endpoint = `${this.apiBase}/api/classes`;
+        super('classes');
+
     }
 
-    private async handleResponse<T>(response: Response): Promise<T> {
-        if (!response.ok) {
-            const error = await response.json().catch(() => ({}));
-            throw new Error(error.message || `HTTP Error: ${response.status}`);
-        }
-        return response.json();
-    }
 
     public async getAll(): Promise<IClass[]> {
         const res = await fetch(this.endpoint, {

@@ -21,18 +21,23 @@ const navItems = [
   },
   {
     title: "Students",
-    href: "/students",
+    href: "/page/students",
     icon: Users,
   },
   {
     title: "Classes",
-    href: "/classes",
+    href: "/page/classes",
     icon: BookOpen,
   },
   {
     title: "Teachers",
-    href: "/teachers",
+    href: "/page/teachers",
     icon: GraduationCap,
+  },
+  {
+    title: "Majors",
+    href: "/page/majors",
+    icon: BookOpen,
   },
   {
     title: "Reports",

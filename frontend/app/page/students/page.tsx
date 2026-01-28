@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { studentService } from "../service/student/service"
+import { studentService } from "../../service/student/service"
 
 // Component dùng chung
-import { Sidebar } from "../../app/components/dasboard/sidebar"
+import { Sidebar } from "../../components/dasboard/sidebar"
 
 // UI Components
 import { Button } from "@/components/ui/button"
