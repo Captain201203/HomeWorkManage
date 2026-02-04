@@ -7,6 +7,7 @@ export interface IStudent extends Document {
     dateOfBirth: Date;
     email: string;
     classId: string; 
+    majorName: string;
 }
 
 const StudentSchema: Schema = new Schema({

@@ -33,6 +33,9 @@ const startServer = async () => {
             console.log(`✓ API endpoint: http://localhost:${PORT}/api/teachers`);
             console.log(`✓ API endpoint: http://localhost:${PORT}/api/majors`);
             console.log(`✓ API endpoint: http://localhost:${PORT}/api/accounts`);
+            console.log(`✓ API endpoint: http://localhost:${PORT}/api/subjects`);
+            console.log(`✓ API endpoint: http://localhost:${PORT}/api/semesters`);
+            console.log(`✓ API endpoint: http://localhost:${PORT}/api/scores`);
 
         });
     } catch (error) {
