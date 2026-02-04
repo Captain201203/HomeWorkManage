@@ -33,6 +33,33 @@ class ScoreService extends BaseApiService {
         return response.data;
     }
 
+    /**
+     * Lấy điểm theo ID
+     */
+    public async getById(id: string): Promise<IScore> {
+        const res = await fetch(`${this.endpoint}/${id}`, {
+            method: 'GET'
+        });
+        const response = await this.handleResponse<{ success: boolean; data: IScore }>(res);
+        return response.data;
+    }
+
+    /**
+     * Cập nhật điểm
+     */
+    public async updateScore(id: string, data: Partial<IScore>): Promise<IScore> {
+        const res = await fetch(`${this.endpoint}/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+        const response = await this.handleResponse<{ success: boolean; data: IScore }>(res);
+        return response.data;
+    }
+
+    /**
+     * Xóa điểm
+     */
     public async delete(id: string): Promise<{ success: boolean }> {
         const res = await fetch(`${this.endpoint}/${id}`, {
             method: 'DELETE'

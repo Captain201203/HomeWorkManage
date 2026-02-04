@@ -11,6 +11,7 @@ import {
   GraduationCap,
   BarChart3,
   Settings,
+  PenTool,
 } from "lucide-react"
 
 const navItems = [
@@ -18,6 +19,11 @@ const navItems = [
     title: "Dashboard",
     href: "/",
     icon: LayoutDashboard,
+  },
+  {
+    title: "Input Scores",
+    href: "/page/scores/input",
+    icon: PenTool,
   },
   {
     title: "Students",
