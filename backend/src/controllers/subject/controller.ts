@@ -14,6 +14,16 @@ export class SubjectController {
         }
     }
 
+    async getByMajor(req: Request, res: Response) {
+        try{
+            const majorName = req.params.majorName;
+            const subjects = await subjectService.getByMajor(majorName);
+            res.status(200).json(subjects);
+        }catch(error: any){
+            return res.status(500).json({message: error.message});
+        }
+    }
+
     async getById(req: Request, res: Response) {
         try{
             const subject = await subjectService.getById(req.params.id);

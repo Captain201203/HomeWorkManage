@@ -14,6 +14,14 @@ class SubjectService extends BaseApiService {
         return this.handleResponse<ISubject[]>(res);
     }
 
+    public async getByMajor(majorName: string): Promise<ISubject[]> {
+        const res = await fetch(`${this.endpoint}/by-major/${majorName}`, {
+            cache: 'no-store',
+            method: 'GET'
+        });
+        return this.handleResponse<ISubject[]>(res);
+    }
+
     public async getById(subjectId: string): Promise<ISubject> {
         const res = await fetch(`${this.endpoint}/${subjectId}`, {
             method: 'GET'

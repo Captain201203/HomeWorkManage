@@ -18,7 +18,14 @@ class StudentService extends BaseApiService {
         return this.handleResponse<IStudent[]>(res);
     }
 
-  
+    public async getByClass(classId: string): Promise<IStudent[]> {
+        const res = await fetch(`${this.endpoint}/by-class/${classId}`, {
+            cache: 'no-store',
+            method: 'GET'
+        });
+        return this.handleResponse<IStudent[]>(res);
+    }
+
     public async getById(studentId: string): Promise<IStudent> {
         const res = await fetch(`${this.endpoint}/${studentId}`, {
             method: 'GET'

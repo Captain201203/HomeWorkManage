@@ -115,10 +115,11 @@ export default function InputScoresPage() {
   const loadSubjects = async () => {
     try {
       setLoading(true)
-      // Filter subjects by selected major
-      const data = await subjectService.getAll()
-      const filtered = data.filter(s => s.majorName === selections.major?.majorName)
-      setSubjects(filtered)
+      // Use the new filtering method from backend
+      if (selections.major?.majorName) {
+        const data = await subjectService.getByMajor(selections.major.majorName)
+        setSubjects(data)
+      }
       setError(null)
     } catch (err) {
       setError("Không thể tải danh sách môn học")
@@ -145,10 +146,11 @@ export default function InputScoresPage() {
   const loadStudents = async () => {
     try {
       setLoading(true)
-      const data = await studentService.getAll()
-      // Filter students by selected class
-      const filtered = data.filter(s => s.classId === selections.class?.classId)
-      setStudents(filtered)
+      // Use the new filtering method from backend
+      if (selections.class?.classId) {
+        const data = await studentService.getByClass(selections.class.classId)
+        setStudents(data)
+      }
       setError(null)
     } catch (err) {
       setError("Không thể tải danh sách sinh viên")

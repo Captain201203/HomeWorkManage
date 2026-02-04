@@ -12,6 +12,17 @@ export class StudentController {
         }
     }
 
+    // 1.5. Lấy sinh viên theo lớp
+    async getByClass(req: Request, res: Response) {
+        try {
+            const classId = req.params.classId;
+            const students = await studentService.getByClass(classId);
+            return res.status(200).json(students);
+        } catch (error: any) {
+            return res.status(500).json({ message: error.message });
+        }
+    }
+
     // 2. Tạo sinh viên mới (Có xử lý lỗi nghiệp vụ từ Service)
     async create(req: Request, res: Response) {
         try {
