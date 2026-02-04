@@ -2,10 +2,7 @@ import { Request, Response } from "express";
 import { scoreService } from "../../service/score/service.js";
 
 class ScoreController {
-    /**
-     * POST /scores
-     * Tạo hoặc cập nhật điểm cho một sinh viên
-     */
+  
     public create = async (req: Request, res: Response): Promise<void> => {
         try {
             const score = await scoreService.createScore(req.body);
@@ -21,10 +18,6 @@ class ScoreController {
         }
     }
 
-    /**
-     * GET /scores
-     * Lấy danh sách điểm kèm bộ lọc (studentId, classCode, semester, ...)
-     */
     public getAll = async (req: Request, res: Response): Promise<void> => {
         try {
             // Truyền req.query trực tiếp vào service để lọc
