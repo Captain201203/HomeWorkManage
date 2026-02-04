@@ -113,8 +113,6 @@ export default function SubjectListPage() {
                         <TableHead>Mã Môn</TableHead>
                         <TableHead>Tên Môn</TableHead>
                         <TableHead>Ngành</TableHead>
-                        <TableHead>Tín Chỉ</TableHead>
-                        <TableHead>Mô Tả</TableHead>
                         <TableHead className="text-right">Hành Động</TableHead>
                       </TableRow>
                     </TableHeader>
@@ -126,10 +124,6 @@ export default function SubjectListPage() {
                           </TableCell>
                           <TableCell className="font-medium">{subject.subjectName}</TableCell>
                           <TableCell>{subject.majorName || '-'}</TableCell>
-                          <TableCell>{subject.credits || 3}</TableCell>
-                          <TableCell className="text-sm text-muted-foreground truncate max-w-xs">
-                            {subject.description || '-'}
-                          </TableCell>
                           <TableCell className="text-right">
                             <div className="flex justify-end gap-2">
                               <Link href={`/page/subjects/edit/${subject._id || subject.subjectId}`}>
