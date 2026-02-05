@@ -40,6 +40,16 @@ export class StudentController {
         }
     }
 
+    async getByClass(req: Request, res: Response) {
+        try {
+            const classId = req.params.classId;
+            const students = await studentService.getByClass(classId);
+            return res.status(200).json(students);
+        } catch (error: any) {
+            return res.status(500).json({ message: error.message });
+        }
+    }
+
     // 4. Cập nhật sinh viên
     async update(req: Request, res: Response) {
         try {

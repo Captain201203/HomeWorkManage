@@ -11,8 +11,15 @@ class SemesterService extends BaseApiService {
             cache: 'no-store',
             method: 'GET'
         });
-        const response = await this.handleResponse<{ success: boolean; data: ISemester[] }>(res);
-        return response.data; // Trả về mảng data từ cấu trúc { success, data }
+        // Trả về trực tiếp kết quả từ handleResponse
+        return await this.handleResponse<ISemester[]>(res); 
+    }
+
+    public async getById(semesterId: string): Promise<ISemester> {
+        const res = await fetch(`${this.endpoint}/${semesterId}`, {
+            method: 'GET'
+        });
+        return await this.handleResponse<ISemester>(res);
     }
 
     public async create(data: Omit<ISemester, '_id'>): Promise<ISemester> {
@@ -23,6 +30,23 @@ class SemesterService extends BaseApiService {
         });
         const response = await this.handleResponse<{ success: boolean; data: ISemester }>(res);
         return response.data;
+    }
+
+    public async update(semesterId: string, data: Partial<ISemester>): Promise<ISemester> {
+        const res = await fetch(`${this.endpoint}/${semesterId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+        const response = await this.handleResponse<{ success: boolean; data: ISemester }>(res);
+        return response.data;
+    }
+
+    public async delete(semesterId: string): Promise<{ success: boolean; message?: string }> {
+        const res = await fetch(`${this.endpoint}/${semesterId}`, {
+            method: 'DELETE'
+        });
+        return this.handleResponse(res);
     }
 }
 

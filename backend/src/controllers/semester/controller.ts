@@ -14,7 +14,7 @@ export class SemesterController {
     async getById(req: Request, res: Response) {
         try{
             const semester = await semesterService.getById(req.params.id);
-            if(!semester) return res.status(404).json({message: "Không tìm thấy mục đích"});
+            if(!semester) return res.status(404).json({message: "Không tìm thấy học kì"});
             res.status(200).json(semester);
         }catch(error: any){
             return res.status(500).json({message: error.message});
@@ -39,7 +39,7 @@ export class SemesterController {
     async update(req: Request, res: Response) {
         try{
             const updatedSemester = await semesterService.update(req.params.id, req.body);
-            if(!updatedSemester) return res.status(404).json({message: "Không tìm thấy mục đích"});
+            if(!updatedSemester) return res.status(404).json({message: "Không tìm thấy học kì"});
             res.status(200).json(updatedSemester);
         }catch(error: any){
             return res.status(500).json({message: error.message});

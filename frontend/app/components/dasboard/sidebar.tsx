@@ -11,6 +11,9 @@ import {
   GraduationCap,
   BarChart3,
   Settings,
+  PenTool,
+  Calendar,
+  BookMarked,
 } from "lucide-react"
 
 const navItems = [
@@ -18,6 +21,11 @@ const navItems = [
     title: "Dashboard",
     href: "/",
     icon: LayoutDashboard,
+  },
+  {
+    title: "Input Scores",
+    href: "/page/scores/input/semester",
+    icon: PenTool,
   },
   {
     title: "Students",
@@ -38,6 +46,16 @@ const navItems = [
     title: "Majors",
     href: "/page/majors",
     icon: BookOpen,
+  },
+  {
+    title: "Semesters",
+    href: "/page/semester",
+    icon: Calendar,
+  },
+  {
+    title: "Subjects",
+    href: "/page/subjects",
+    icon: BookMarked,
   },
   {
     title: "Reports",

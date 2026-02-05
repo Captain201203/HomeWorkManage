@@ -15,10 +15,26 @@ class StudentService extends BaseApiService {
             cache: 'no-store',
             method: 'GET'
         });
-        return this.handleResponse<IStudent[]>(res);
+        // Trả về trực tiếp mảng từ handleResponse
+        return await this.handleResponse<IStudent[]>(res);
     }
 
-  
+    public async getByClass(classId: string): Promise<IStudent[]> {
+        // Đảm bảo classId không bị undefined hoặc rỗng
+        if (!classId) return [];
+
+        // URL mong đợi: http://localhost:3001/api/students/by-class/22DTHG3
+        const url = `${this.endpoint}/by-class/${encodeURIComponent(classId)}`;
+        
+        console.log("Đang gọi API tại:", url); // Log ra để kiểm chứng 100%
+
+        const res = await fetch(url, {
+            cache: 'no-store',
+            method: 'GET'
+        });
+        
+        return await this.handleResponse<IStudent[]>(res);
+    }
     public async getById(studentId: string): Promise<IStudent> {
         const res = await fetch(`${this.endpoint}/${studentId}`, {
             method: 'GET'

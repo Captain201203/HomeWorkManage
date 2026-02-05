@@ -14,6 +14,10 @@ export class StudentService implements IStudentService {
         return StudentModel.find().populate('classId');
     }
 
+    async getByClass(classId: string): Promise<IStudent[]> {
+        return StudentModel.find({ classId }).populate('classId');
+    }
+
     async getById(id: string): Promise<IStudent | null> {
         return StudentModel.findOne({studentId: id}).populate('classId').exec();
     }

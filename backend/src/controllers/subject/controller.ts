@@ -17,12 +17,21 @@ export class SubjectController {
     async getById(req: Request, res: Response) {
         try{
             const subject = await subjectService.getById(req.params.id);
-            if(!subject) return res.status(404).json({message: "Không tìm thấy mục đích"});
+            if(!subject) return res.status(404).json({message: "Không tìm thấy học kì"});
             res.status(200).json(subject);
         }catch(error: any){
             return res.status(500).json({message: error.message});
         }
     }
+
+    async getByMajor(req: Request, res: Response) {
+        try{
+            const subjects = await subjectService.getByMajor(req.params.majorName);
+            res.status(200).json(subjects);
+        }catch(error: any){
+            return res.status(500).json({message: error.message});
+        }
+    }   
 
     async create(req: Request, res: Response) {
         try{
@@ -42,7 +51,7 @@ export class SubjectController {
     async update(req: Request, res: Response) {
         try{
             const updatedSubject = await subjectService.update(req.params.id, req.body);
-            if(!updatedSubject) return res.status(404).json({message: "Không tìm thấy mục đích"});
+            if(!updatedSubject) return res.status(404).json({message: "Không tìm thấy học kì"});
             res.status(200).json(updatedSubject);
         }catch(error: any){
             return res.status(500).json({message: error.message});
@@ -52,7 +61,7 @@ export class SubjectController {
     async delete(req: Request, res: Response) {
         try{
             const deletedSubject = await subjectService.delete(req.params.id);
-            if(!deletedSubject) return res.status(404).json({message: "Không tìm thấy mục đích"});
+            if(!deletedSubject) return res.status(404).json({message: "Không tìm thấy học kì"});
             res.status(200).json({message: "Xóa mục đích thành công"});
         }catch(error: any){
             return res.status(500).json({message: error.message});

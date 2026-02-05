@@ -15,6 +15,9 @@ class StudentRouter {
         // Lấy danh sách sinh viên
         this.router.get('/', (req: Request, res: Response) => studentController.getAll(req, res));
 
+        // Lấy sinh viên theo lớp
+        this.router.get('/by-class/:classId', (req: Request, res: Response) => studentController.getByClass(req, res));
+
         // Lấy chi tiết 1 sinh viên
         this.router.get('/:id', (req: Request, res: Response) => studentController.getById(req, res));
 

@@ -11,6 +11,7 @@ class SubjectRoute {
 
     private initializeRoutes() {
         this.router.get('/', (req: Request, res: Response) => subjectController.getAll(req, res));
+        this.router.get('/by-major/:majorName', (req: Request, res: Response) => subjectController.getByMajor(req, res));
         this.router.get('/:id', (req: Request, res: Response) => subjectController.getById(req, res));
         this.router.post('/', (req: Request, res: Response) => subjectController.create(req, res));
         this.router.put('/:id', (req: Request, res: Response) => subjectController.update(req, res));

@@ -15,6 +15,10 @@ export class SubjectService implements ISubjectService {
 
     }
 
+    async getByMajor(majorName: string): Promise<ISubject[]> {
+        return SubjectModel.find({ majorName }).populate('subjectId');
+    }
+
     async getById(id: string): Promise<ISubject | null> {
         return  SubjectModel.findOne({ subjectId: id }).populate('subjectId');
     }
