@@ -136,7 +136,7 @@ export default function ClassesPage() {
                         
                         {/* Nút Action */}
                         <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <Link href={`/classes/edit/${cls.classId}`}>
+                          <Link href={`/page/classes/edit/${cls.classId}`}>
                             <Button variant="secondary" size="icon" className="h-8 w-8 hover:text-blue-600 border">
                               <Pencil className="w-4 h-4" />
                             </Button>

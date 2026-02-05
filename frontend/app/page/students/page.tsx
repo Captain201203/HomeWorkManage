@@ -128,7 +128,7 @@ export default function StudentListPage() {
                       
                       {/* Nút hành động nổi trên Card */}
                       <div className="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity absolute top-2 right-2">
-                        <Link href={`/students/edit/${student.studentId}`}>
+                        <Link href={`/page/students/edit/${student.studentId}`}>
                           <Button variant="secondary" size="icon" className="h-8 w-8 hover:bg-blue-50 hover:text-blue-600 shadow-sm border">
                             <Pencil className="h-4 w-4" />
                           </Button>

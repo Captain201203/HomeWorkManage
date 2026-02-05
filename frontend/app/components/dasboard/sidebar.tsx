@@ -49,7 +49,7 @@ const navItems = [
   },
   {
     title: "Semesters",
-    href: "/page/semester",
+    href: "/page/semesters",
     icon: Calendar,
   },
   {

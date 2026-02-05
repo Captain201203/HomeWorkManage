@@ -171,7 +171,7 @@ export default function TeachersPage() {
 
                         <div className="w-full flex gap-2 pt-4 border-t">
                           <Button variant="outline" size="sm" className="flex-1 gap-2 hover:bg-blue-50 hover:text-blue-600 border-blue-100" asChild>
-                            <Link href={`/teachers/edit/${teacher.teacherId}`}>
+                            <Link href={`/page/teachers/edit/${teacher.teacherId}`}>
                               <Pencil className="w-4 h-4" /> Edit
                             </Link>
                           </Button>
