@@ -85,6 +85,8 @@ class ScoreService {
     public async getScoreByStudentId(studentId: string): Promise<IScore[]> {
         return ScoreModel.find({ studentId });
     }
+
+
 }
 
 

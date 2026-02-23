@@ -20,7 +20,7 @@ export class AuthService {
         // 3. Tạo JWT Token (thời hạn 1 ngày)
         const token = jwt.sign(
             { id: account.accountId, role: account.role },
-            "YOUR_SECRET_KEY", // Nên để trong file .env
+            process.env.JWT_SECRET as string, // Sử dụng biến từ .env
             { expiresIn: "1d" }
         );
 
