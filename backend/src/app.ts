@@ -10,6 +10,8 @@ import { accountRouter } from './routes/account/route.js';
 import { subjectRouter } from './routes/subject/route.js';
 import { semesterRouter } from './routes/semester/route.js';
 import { scoreRouter } from './routes/score/route.js';
+import { authRouter } from './routes/auth/route.js';
+
 
 // Load environment variables
 dotenv.config();
@@ -31,6 +33,7 @@ app.use('/api/accounts', accountRouter);
 app.use('/api/subjects', subjectRouter);
 app.use('/api/semesters', semesterRouter);
 app.use('/api/scores', scoreRouter);
+app.use('/api/auth', authRouter);
 
 
 // Health check endpoint

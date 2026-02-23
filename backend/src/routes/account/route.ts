@@ -14,6 +14,8 @@ class AccountRouter {
 
         this.router.post('/', (req: Request, res: Response) => accountController.create(req, res));
 
+        this.router.post('/auto', (req: Request, res: Response) => accountController.createAutoAccount(req, res));
+
         this.router.put('/:id', (req: Request, res: Response) => accountController.update(req, res));
 
         this.router.delete('/:id', (req: Request, res: Response) => accountController.delete(req, res));

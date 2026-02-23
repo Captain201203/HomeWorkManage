@@ -71,5 +71,24 @@ export class AccountController{
             return res.status(500).json({error: error.message});
         }
     }
+
+    // Tạo tài khoản mới tự động
+    async createAutoAccount(req: Request, res: Response) {
+        try {
+            const { email, mssv, role } = req.body;
+
+            // Kiểm tra ràng buộc dữ liệu đầu vào
+            if (!email || !mssv || !role) {
+                return res.status(400).json({ 
+                    error: 'Thiếu thông tin: email, mssv và role là bắt buộc.' 
+                });
+            }
+
+            const account = await this.accountService.createAutoAccount(email, mssv, role);
+            res.status(201).json(account);
+        } catch (error: any) {
+            return res.status(500).json({ error: error.message });
+        }
+    }
 }
 export const accountController = new AccountController(new AccountService());

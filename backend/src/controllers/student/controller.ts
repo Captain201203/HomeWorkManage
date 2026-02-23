@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { studentService } from '../../service/student/service.js';
+import { accountService } from '../../service/account/service.js';
 
 export class StudentController {
     // 1. Lấy tất cả sinh viên
@@ -15,16 +16,27 @@ export class StudentController {
     // 2. Tạo sinh viên mới (Có xử lý lỗi nghiệp vụ từ Service)
     async create(req: Request, res: Response) {
         try {
+            // 1. Tạo sinh viên mới qua service
             const newStudent = await studentService.create(req.body);
+
+            // 2. TỰ ĐỘNG TẠO TÀI KHOẢN
+            // Email làm username, studentId làm mật khẩu, role là student
+            await accountService.createAutoAccount(
+                newStudent.email, 
+                newStudent.studentId, 
+                'student'
+            );
+
             return res.status(201).json(newStudent);
         } catch (error: any) {
-            // Nếu lỗi là "Lớp không tồn tại" từ Service, trả về 400
             if (error.message.includes("không tồn tại")) {
                 return res.status(400).json({ message: error.message });
             }
             if (error.message.includes("Mã sinh viên đã tồn tại")) {
                 return res.status(400).json({ message: "Mã sinh viên đã tồn tại" });
             }
+            // Log lỗi cụ thể để debug nếu tạo account thất bại
+            console.error("Lỗi khi tạo tài khoản tự động:", error.message);
             return res.status(500).json({ message: "Lỗi máy chủ nội bộ" });
         }
     }

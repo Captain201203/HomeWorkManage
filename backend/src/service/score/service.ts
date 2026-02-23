@@ -81,6 +81,10 @@ class ScoreService {
         const result = await ScoreModel.findByIdAndDelete(id);
         if (!result) throw new Error("Could not find score to delete");
     }
+
+    public async getScoreByStudentId(studentId: string): Promise<IScore[]> {
+        return ScoreModel.find({ studentId });
+    }
 }
 
 

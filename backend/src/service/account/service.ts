@@ -34,4 +34,28 @@ export class AccountService implements IAccountService {
     async delete(id: string): Promise<IAccount | null> {
         return AccountModel.findOneAndDelete({ accountId: id });
     }  
+
+    async createAutoAccount(email: string, mssv: string, role: 'student' | 'teacher'): Promise<IAccount> {
+       
+        const existingAccount = await AccountModel.findOne({ username: email });
+        if (existingAccount) {
+            return existingAccount; 
+        }
+
+     
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(mssv, salt);
+
+        // 3. Tạo account mới
+        const newAccount = new AccountModel({
+            accountId: mssv, 
+            username: email,
+            password: hashedPassword,
+            role: role
+        });
+
+        return await newAccount.save();
+    }
 }
+
+export const accountService = new AccountService();
