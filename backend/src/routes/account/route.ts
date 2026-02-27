@@ -14,7 +14,9 @@ class AccountRouter {
 
         this.router.post('/', (req: Request, res: Response) => accountController.create(req, res));
 
-        this.router.post('/auto', (req: Request, res: Response) => accountController.createAutoAccount(req, res));
+        this.router.post('/autoStudent', (req: Request, res: Response) => accountController.createAutoAccountStudent(req, res));
+        this.router.post('/autoAdmin', (req: Request, res: Response) => accountController.createAutoAccountAdmin(req, res));
+        this.router.post('/autoTeacher', (req: Request, res: Response) => accountController.createAutoAccountTeacher(req, res));
 
         this.router.put('/:id', (req: Request, res: Response) => accountController.update(req, res));
 

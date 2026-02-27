@@ -1,5 +1,6 @@
 import { adminService } from "../../service/admin/service.js";
 import { Request, Response } from "express";
+import { accountService } from "../../service/account/service.js";
 
 export class AdminController {
 
@@ -13,10 +14,21 @@ export class AdminController {
     }
 
     async create (req: Request, res: Response) {
-        try{
+        try {
             const newAdmin = await adminService.create(req.body);
-            return res.status(201).json(newAdmin);
 
+            // Debug để kiểm tra dữ liệu trước khi tạo tài khoản
+            console.log("Dữ liệu Admin mới:", newAdmin);
+
+            if (newAdmin && newAdmin.email && newAdmin.adminId) {
+                await accountService.createAutoAccountAdmin(
+                    newAdmin.email, 
+                    newAdmin.adminId, 
+                    'admin'
+                );
+            }
+            
+            return res.status(201).json(newAdmin);
         } catch (error: any) {
             return res.status(500).json({ message: error.message });
         }

@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
-import { semesterService } from "../../service/semester/service"
-import { ISemester } from "../../types/semester/type"
+import { semesterService } from "../../../service/semester/service"
+import { ISemester } from "../../../types/semester/type"
 
-import { Sidebar } from "../../components/dasboard/sidebar"
+import { Sidebar } from "../../../components/dasboard/sidebar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
@@ -70,7 +70,7 @@ export default function SemesterListPage() {
 
   return (
     <div className="flex min-h-screen bg-background">
-      <Sidebar />
+     
       
       <main className="flex-1 overflow-auto">
         <div className="p-8">

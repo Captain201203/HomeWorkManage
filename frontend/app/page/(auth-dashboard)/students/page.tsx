@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { studentService } from "../../service/student/service"
+import { studentService } from "../../../service/student/service"
 
 // Component dùng chung
-import { Sidebar } from "../../components/dasboard/sidebar"
+import { Sidebar } from "../../../components/dasboard/sidebar"
 
 // UI Components
 import { Button } from "@/components/ui/button"
@@ -65,10 +65,10 @@ export default function StudentListPage() {
   return (
     <div className="flex min-h-screen bg-muted/30 text-foreground">
       {/* Sidebar dùng chung */}
-      <Sidebar />
+    
 
       {/* Main Content: Thêm md:ml-64 để tránh bị Sidebar đè lên nếu Sidebar là fixed */}
-      <main className="flex-1 p-8 md:ml-64">
+      <main className="flex-1 p-8">
         <div className="flex flex-col gap-8">
           
           {/* Page Header */}

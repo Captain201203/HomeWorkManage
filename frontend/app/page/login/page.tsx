@@ -1,7 +1,7 @@
 // src/app/login/page.tsx
 "use client"
 
-import { useState } from "react"
+import { use, useState } from "react"
 import { useRouter } from "next/navigation"
 import { authService } from "@/app/service/auth/service"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Loader2, Lock, User, AlertCircle } from "lucide-react"
+import { useEffect } from "react";
+
 
 export default function LoginPage() {
   const [username, setUsername] = useState("")
@@ -16,6 +18,18 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const router = useRouter()
+
+  useEffect(() => {
+        // Nếu người dùng nhấn nút "Tiến tới" nhưng Token không tồn tại
+        const token = localStorage.getItem("token");
+        if (!token) {
+            // Ép buộc ở lại trang login và xóa lịch sử các trang trước đó
+            window.history.pushState(null, "", window.location.href);
+            window.onpopstate = function () {
+                window.history.go(1);
+            };
+        }
+    }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()

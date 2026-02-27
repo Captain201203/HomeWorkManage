@@ -1,135 +1,105 @@
 "use client"
 
+import { useEffect, useState, useMemo } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Skeleton } from "@/components/ui/skeleton" // Giả định bạn dùng Shadcn UI
 import {
-  LayoutDashboard,
-  Users,
-  BookOpen,
-  GraduationCap,
-  BarChart3,
-  Settings,
-  PenTool,
-  Calendar,
-  BookMarked,
+  LayoutDashboard, Users, BookOpen, GraduationCap,
+  BarChart3, Settings, PenTool, Calendar, BookMarked, UserCog
 } from "lucide-react"
 
 const navItems = [
-  {
-    title: "Dashboard",
-    href: "/",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Input Scores",
-    href: "/page/scores/input/semester",
-    icon: PenTool,
-  },
-  {
-    title: "Students",
-    href: "/page/students",
-    icon: Users,
-  },
-  {
-    title: "Classes",
-    href: "/page/classes",
-    icon: BookOpen,
-  },
-  {
-    title: "Teachers",
-    href: "/page/teachers",
-    icon: GraduationCap,
-  },
-  {
-    title: "Majors",
-    href: "/page/majors",
-    icon: BookOpen,
-  },
-  {
-    title: "Semesters",
-    href: "/page/semesters",
-    icon: Calendar,
-  },
-  {
-    title: "Subjects",
-    href: "/page/subjects",
-    icon: BookMarked,
-  },
-  {
-    title: "Reports",
-    href: "/reports",
-    icon: BarChart3,
-  },
+  { title: "Dashboard", href: "/page/dashboard", icon: LayoutDashboard, roles: ["admin", "teacher"] },
+  { title: "Input Scores", href: "/page/scores/input/semester", icon: PenTool, roles: ["admin", "teacher"] },
+  { title: "Accounts", href: "/page/account", icon: UserCog, roles: ["admin"] },
+  { title: "Students", href: "/page/students", icon: Users, roles: ["admin", "teacher"] },
+  { title: "Classes", href: "/page/classes", icon: BookOpen, roles: ["admin", "teacher"] },
+  { title: "Teachers", href: "/page/teachers", icon: GraduationCap, roles: ["admin"] },
+  { title: "Majors", href: "/page/majors", icon: BookOpen, roles: ["admin"] },
+  { title: "Semesters", href: "/page/semesters", icon: Calendar, roles: ["admin"] },
+  { title: "Subjects", href: "/page/subjects", icon: BookMarked, roles: ["admin", "teacher"] },
 ]
 
 export function Sidebar() {
   const pathname = usePathname()
+  const [mounted, setMounted] = useState(false)
+  const [userData, setUserData] = useState({ role: "", username: "" })
+
+  useEffect(() => {
+    setMounted(true)
+    setUserData({
+      role: localStorage.getItem("user_role") || "",
+      username: localStorage.getItem("user_username") || "User"
+    })
+  }, [])
+
+  // Dùng useMemo để tránh tính toán lại mỗi lần re-render
+  const filteredNavItems = useMemo(() => {
+    return navItems.filter(item => item.roles.includes(userData.role))
+  }, [userData.role])
+
+  // Tránh lỗi Hydration bằng cách không render gì trước khi mounted
+  if (!mounted) return <div className="w-64 border-r h-screen bg-background" />
 
   return (
-    <aside className="flex h-screen w-64 flex-col border-r border-border bg-background">
-      {/* Logo */}
-      <div className="flex items-center gap-2 px-6 py-5">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-teal-600">
-          <svg
-            className="h-5 w-5 text-white"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-            />
-          </svg>
+    <aside className="flex h-screen w-64 flex-col border-r bg-card shadow-sm">
+      <div className="px-6 py-6">
+        <div className="flex items-center gap-3">
+            <div className="bg-teal-600 p-2 rounded-lg">
+                <BookMarked className="text-white w-5 h-5" />
+            </div>
+            <span className="text-xl font-bold tracking-tight text-teal-700">EduManage</span>
         </div>
-        <span className="text-xl font-semibold text-teal-600">EduManage</span>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 space-y-1 px-3 py-4">
-        {navItems.map((item) => {
-          const isActive = pathname === item.href
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
-                isActive
-                  ? "bg-teal-50 text-teal-700"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
-              )}
-            >
-              <item.icon className="h-5 w-5" />
-              {item.title}
-            </Link>
-          )
-        })}
+      <nav className="flex-1 px-3 space-y-1 overflow-y-auto custom-scrollbar">
+        {filteredNavItems.length > 0 ? (
+          filteredNavItems.map((item) => {
+            // Kiểm tra active link thông minh hơn
+            const isActive = item.href === "/page/dashboard" 
+                ? pathname === item.href 
+                : pathname.startsWith(item.href)
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "group flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-all",
+                  isActive
+                    ? "bg-teal-600 text-white shadow-md shadow-teal-200"
+                    : "text-muted-foreground hover:bg-teal-50 hover:text-teal-700"
+                )}
+              >
+                <item.icon className={cn("h-5 w-5", isActive ? "text-white" : "group-hover:text-teal-600")} />
+                {item.title}
+              </Link>
+            )
+          })
+        ) : (
+          <div className="p-4 space-y-3">
+             <Skeleton className="h-8 w-full" />
+             <Skeleton className="h-8 w-full" />
+             <Skeleton className="h-8 w-full" />
+          </div>
+        )}
       </nav>
 
-      {/* User Profile */}
-      <div className="border-t border-border p-4">
-        <div className="flex items-center gap-3">
-          <Avatar className="h-10 w-10">
-            <AvatarImage src="/avatar.jpg" alt="Alex Johnson" />
-            <AvatarFallback className="bg-amber-100 text-amber-700">AJ</AvatarFallback>
+      <div className="p-4 border-t bg-slate-50/50">
+        <div className="flex items-center gap-3 p-2 rounded-lg border bg-white shadow-sm">
+          <Avatar className="h-9 w-9 border-2 border-teal-100">
+            <AvatarFallback className="bg-teal-50 text-teal-700 text-xs font-bold uppercase">
+              {userData.username.substring(0, 2)}
+            </AvatarFallback>
           </Avatar>
-          <div className="flex-1">
-            <p className="text-sm font-medium">Alex Johnson</p>
-            <p className="text-xs text-teal-600">Super Admin</p>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold truncate leading-none mb-1">{userData.username.split('@')[0]}</p>
+            <p className="text-[10px] font-bold text-teal-600 uppercase tracking-widest">{userData.role}</p>
           </div>
         </div>
-        <Link
-          href="/settings"
-          className="mt-4 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-        >
-          <Settings className="h-5 w-5" />
-          Settings
-        </Link>
       </div>
     </aside>
   )

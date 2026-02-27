@@ -80,9 +80,9 @@ export default function TeachersPage() {
   return (
     <div className="flex min-h-screen bg-gray-50 text-foreground">
       {/* Sidebar dùng chung */}
-      <Sidebar />
+      
 
-      <main className="flex-1 md:ml-64 p-8">
+      <main className="flex-1  p-8">
         {/* Header */}
         <header className="flex items-center justify-between mb-8">
           <div>

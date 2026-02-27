@@ -17,7 +17,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 // Component dùng chung
-import { Sidebar } from "../../components/dasboard/sidebar";
+import { Sidebar } from "../../../components/dasboard/sidebar";
 
 // API Service & Types
 import { classService } from "@/app/service/class/service"; 
@@ -72,10 +72,10 @@ export default function ClassesPage() {
   return (
     <div className="flex min-h-screen bg-muted/30 text-foreground">
       {/* Sidebar dùng chung */}
-      <Sidebar />
+    
 
       {/* Main Content - Thêm md:ml-64 để khớp với Sidebar fixed */}
-      <main className="flex-1 p-8 md:ml-64">
+      <main className="flex-1 p-8">
         <header className="flex justify-between items-start mb-8">
           <div>
             <h1 className="text-3xl font-bold text-teal-600 tracking-tight">Class Management</h1>

@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { subjectService } from "../../service/subject/service"
-import { ISubject } from "../../types/subject/type"
+import { subjectService } from "../../../service/subject/service"
+import { ISubject } from "../../../types/subject/type"
 
-import { Sidebar } from "../../components/dasboard/sidebar"
+import { Sidebar } from "../../../components/dasboard/sidebar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -57,7 +57,7 @@ export default function SubjectListPage() {
 
   return (
     <div className="flex min-h-screen bg-background">
-      <Sidebar />
+ 
       
       <main className="flex-1 overflow-auto">
         <div className="p-8">

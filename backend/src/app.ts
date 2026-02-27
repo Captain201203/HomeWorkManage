@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { studentRouter } from './routes/student/route.js';
 import { classRouter } from './routes/class/route.js';
-// import { adminRouter } from './routes/admin/route.js';
+import { adminRouter } from './routes/admin/route.js';
 import { teacherRouter } from './routes/teacher/route.js';
 import { majorRouter } from './routes/major/route.js';
 import { accountRouter } from './routes/account/route.js';
@@ -23,10 +23,17 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    next();
+});
+
 // Routes
 app.use('/api/students', studentRouter);
 app.use('/api/classes', classRouter);
-// app.use('/api/admins', adminRouter);
+app.use('/api/admins', adminRouter);
 app.use('/api/teachers', teacherRouter);
 app.use('/api/majors', majorRouter);
 app.use('/api/accounts', accountRouter);

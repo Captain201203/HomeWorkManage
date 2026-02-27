@@ -57,8 +57,8 @@ export default function MajorsPage() {
 
   return (
     <div className="flex min-h-screen bg-gray-50 text-foreground">
-      <Sidebar />
-      <main className="flex-1 md:ml-64 p-8">
+   
+      <main className="flex-1  p-8">
         <header className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-teal-600">Majors</h1>

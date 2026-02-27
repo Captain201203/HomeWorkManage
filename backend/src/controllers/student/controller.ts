@@ -21,7 +21,7 @@ export class StudentController {
 
             // 2. TỰ ĐỘNG TẠO TÀI KHOẢN
             // Email làm username, studentId làm mật khẩu, role là student
-            await accountService.createAutoAccount(
+            await accountService.createAutoAccountStudent(
                 newStudent.email, 
                 newStudent.studentId, 
                 'student'

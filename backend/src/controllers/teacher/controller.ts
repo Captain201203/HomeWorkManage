@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { teacherService } from "../../service/teacher/service.js";
+import { accountService } from "../../service/account/service.js";
 
 class TeacherController {
     async getAll(req: Request, res: Response) {
@@ -24,12 +25,24 @@ class TeacherController {
         }
     }
 
+
     async create(req: Request, res: Response) {
         try {
-            const teacher = await teacherService.create(req.body);
-            res.status(201).json(teacher);
-        } catch (error) {
-            res.status(500).json({ message: "Lỗi khi tạo giảng viên." });
+            const newTeacher = await teacherService.create(req.body);
+
+            // Kiểm tra dữ liệu trả về từ service
+            if (newTeacher && newTeacher.teacherEmail && newTeacher.teacherId) {
+                // Gọi đúng hàm tạo tài khoản cho Teacher với role 'teacher'
+                await accountService.createAutoAccountTeacher(
+                    newTeacher.teacherEmail, 
+                    newTeacher.teacherId, 
+                    'teacher' 
+                );
+            }
+            
+            return res.status(201).json(newTeacher);
+        } catch (error: any) {
+            return res.status(500).json({ message: error.message });
         }
     }
 

@@ -23,6 +23,8 @@ export class AdminService implements IAdminService{
         if (existingAdmin) {
             throw new Error("Quản trị viên đã tồn tại.");
         }
+
+        
         return await AdminModel.create(data);
 
     }

@@ -73,7 +73,7 @@ export class AccountController{
     }
 
     // Tạo tài khoản mới tự động
-    async createAutoAccount(req: Request, res: Response) {
+    async createAutoAccountStudent(req: Request, res: Response) {
         try {
             const { email, mssv, role } = req.body;
 
@@ -84,7 +84,43 @@ export class AccountController{
                 });
             }
 
-            const account = await this.accountService.createAutoAccount(email, mssv, role);
+            const account = await this.accountService.createAutoAccountStudent(email, mssv, role);
+            res.status(201).json(account);
+        } catch (error: any) {
+            return res.status(500).json({ error: error.message });
+        }
+    }
+
+    async createAutoAccountAdmin(req: Request, res: Response) {
+        try {
+            const { email, adminId, role } = req.body;
+
+            // Kiểm tra ràng buộc dữ liệu đầu vào
+            if (!email || !adminId || !role) {
+                return res.status(400).json({
+                    error: 'Thiếu thông tin: email, adminId và role là bắt buộc.'
+                });
+            }
+
+            const account = await this.accountService.createAutoAccountAdmin(email, adminId, role);
+            res.status(201).json(account);
+        } catch (error: any) {
+            return res.status(500).json({ error: error.message });
+        }
+    }
+
+    async createAutoAccountTeacher(req: Request, res: Response) {
+        try {
+            const { teacherEmail, teacherId, role } = req.body;
+
+            // Kiểm tra ràng buộc dữ liệu đầu vào
+            if (!teacherEmail || !teacherId || !role) {
+                return res.status(400).json({
+                    error: 'Thiếu thông tin: email, teacherId và role là bắt buộc.'
+                });
+            }
+
+            const account = await this.accountService.createAutoAccountTeacher(teacherEmail, teacherId, role);
             res.status(201).json(account);
         } catch (error: any) {
             return res.status(500).json({ error: error.message });

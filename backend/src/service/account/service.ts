@@ -35,7 +35,7 @@ export class AccountService implements IAccountService {
         return AccountModel.findOneAndDelete({ accountId: id });
     }  
 
-    async createAutoAccount(email: string, mssv: string, role: 'student' | 'teacher'): Promise<IAccount> {
+    async createAutoAccountStudent(email: string, mssv: string, role: 'student' | 'teacher'): Promise<IAccount> {
        
         const existingAccount = await AccountModel.findOne({ username: email });
         if (existingAccount) {
@@ -50,6 +50,46 @@ export class AccountService implements IAccountService {
         const newAccount = new AccountModel({
             accountId: mssv, 
             username: email,
+            password: hashedPassword,
+            role: role
+        });
+
+        return await newAccount.save();
+    }
+
+    async createAutoAccountAdmin(email: string, adminId: string, role: 'admin'): Promise<IAccount> {
+        const existingAccount = await AccountModel.findOne({ username: email });
+        if (existingAccount) {
+            return existingAccount;
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(adminId, salt);
+
+        // 3. Tạo account mới
+        const newAccount = new AccountModel({
+            accountId: adminId,
+            username: email,
+            password: hashedPassword,
+            role: role
+        });
+
+        return await newAccount.save();
+    }
+
+    async createAutoAccountTeacher(teacherEmail: string, teacherId: string, role: 'teacher'): Promise<IAccount> {
+        const existingAccount = await AccountModel.findOne({ username: teacherEmail });
+        if (existingAccount) {
+            return existingAccount;
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(teacherId, salt);
+
+        // 3. Tạo account mới
+        const newAccount = new AccountModel({
+            accountId: teacherId,
+            username: teacherEmail,
             password: hashedPassword,
             role: role
         });

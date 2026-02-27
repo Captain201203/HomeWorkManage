@@ -5,7 +5,7 @@ class AccountService extends BaseApiService {
 
 
     constructor() {
-        super('account');
+        super('accounts');
 
     }
 

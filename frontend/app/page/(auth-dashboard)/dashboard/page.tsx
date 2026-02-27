@@ -2,11 +2,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Sidebar } from "../../components/dasboard/sidebar"
-import { Header } from "../../components/dasboard/header"
-import { StatCards } from "../../components/dasboard/stat-cards"
-import { RecentActivity } from "../../components/dasboard/recent-activity"
-import { Footer } from "../../components/dasboard/footer"
+import { Sidebar } from "../../../components/dasboard/sidebar"
+import { Header } from "../../../components/dasboard/header"
+import { StatCards } from "../../../components/dasboard/stat-cards"
+import { RecentActivity } from "../../../components/dasboard/recent-activity"
+import { Footer } from "../../../components/dasboard/footer"
 
 export default function DashboardPage() {
   const [username, setUsername] = useState("User")
@@ -29,9 +29,9 @@ export default function DashboardPage() {
 
   return (
     <div className="flex min-h-screen bg-muted/30">
-      <Sidebar />
+      
       <div className="flex flex-1 flex-col">
-        <Header />
+        
         <main className="flex-1 px-8 py-6">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-foreground capitalize">
