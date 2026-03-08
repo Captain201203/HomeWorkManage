@@ -40,6 +40,7 @@ export default function EditTeacherPage() {
     teacherName: "",
     teacherEmail: "",
     teacherPhone: "",
+    position: "",
   });
 
   // 1. Fetch dữ liệu giảng viên khi load trang
@@ -56,6 +57,7 @@ export default function EditTeacherPage() {
           teacherName: response.teacherName || "",
           teacherEmail: response.teacherEmail || "",
           teacherPhone: response.teacherPhone || "",
+          position: response.position || "",
         });
       } catch (error: any) {
         console.error("Error fetching teacher:", error);
@@ -124,8 +126,8 @@ export default function EditTeacherPage() {
   if (isLoadingData) {
     return (
       <div className="flex min-h-screen bg-gray-50">
-        <Sidebar />
-        <main className="flex-1 md:ml-64 flex items-center justify-center">
+        
+        <main className="flex-1 flex items-center justify-center">
           <div className="flex flex-col items-center gap-3">
             <Loader2 className="w-10 h-10 text-teal-600 animate-spin" />
             <p className="text-muted-foreground">Đang tải dữ liệu giảng viên...</p>
@@ -137,9 +139,9 @@ export default function EditTeacherPage() {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <Sidebar />
+     
 
-      <main className="flex-1 md:ml-64">
+      <main className="flex-1 ">
         {/* Header Section */}
         <header className="bg-white border-b border-gray-200 sticky top-0 z-10 shadow-sm">
           <div className="px-8 py-6">
@@ -231,6 +233,21 @@ export default function EditTeacherPage() {
                     className={cn("focus-visible:ring-teal-500", errors.teacherPhone && "border-red-500")}
                   />
                   {errors.teacherPhone && <p className="text-red-500 text-xs mt-1">{errors.teacherPhone}</p>}
+                </div>
+
+                {/* Chức vụ */}
+                <div className="space-y-2">
+                  <Label htmlFor="position" className="font-semibold text-gray-700 flex items-center gap-2">
+                    Chức vụ <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="position"
+                    placeholder="VD: Giáo viên"
+                    value={formData.position}
+                    onChange={(e) => handleChange("position", e.target.value)}
+                    className={cn("focus-visible:ring-teal-500", errors.position && "border-red-500")}
+                  />
+                  {errors.position && <p className="text-red-500 text-xs mt-1">{errors.position}</p>}
                 </div>
               </CardContent>
             </Card>

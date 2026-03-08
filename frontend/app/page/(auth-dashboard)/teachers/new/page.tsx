@@ -37,6 +37,7 @@ export default function NewTeacherPage() {
     teacherName: "",
     teacherEmail: "",
     teacherPhone: "",
+    position: "",
   });
 
   // 1. Logic Kiểm tra Form
@@ -56,6 +57,10 @@ export default function NewTeacherPage() {
     }
     if (!formData.teacherPhone.trim()) {
       newErrors.teacherPhone = "Số điện thoại là bắt buộc";
+    }
+
+    if (!formData.position.trim()) {
+      newErrors.position = "Chức vụ là bắt buộc";
     }
 
     setErrors(newErrors);
@@ -97,9 +102,9 @@ export default function NewTeacherPage() {
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar dùng chung */}
-      <Sidebar />
+     
 
-      <main className="flex-1 md:ml-64">
+      <main className="flex-1 ">
         {/* Sticky Header */}
         <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
           <div className="px-8 py-6">
@@ -197,6 +202,22 @@ export default function NewTeacherPage() {
                     disabled={isLoading}
                   />
                   {errors.teacherPhone && <p className="text-red-500 text-xs mt-1">{errors.teacherPhone}</p>}
+                </div>
+
+                {/* Chức vụ */}
+                <div className="space-y-2">
+                  <Label htmlFor="position" className="font-semibold">
+                    Chức vụ <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="position"
+                    placeholder="VD: Giáo viên"
+                    value={formData.position}
+                    onChange={(e) => handleChange("position", e.target.value)}
+                    className={cn("focus-visible:ring-teal-500", errors.position && "border-red-500")}
+                    disabled={isLoading}
+                  />
+                  {errors.position && <p className="text-red-500 text-xs mt-1">{errors.position}</p>}
                 </div>
               </CardContent>
             </Card>

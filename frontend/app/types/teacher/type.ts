@@ -4,4 +4,5 @@ export interface ITeacher {
     teacherName: string;
     teacherEmail: string;
     teacherPhone: string;
+    position: string;
 }

@@ -123,7 +123,7 @@ function ScoreInputFormContent() {
 
   return (
     <div className="flex min-h-screen bg-background">
-      <Sidebar />
+  
       <main className="flex-1 p-8 overflow-auto">
         <div className="max-w-6xl mx-auto space-y-8">
           {/* Header & Breadcrumb */}

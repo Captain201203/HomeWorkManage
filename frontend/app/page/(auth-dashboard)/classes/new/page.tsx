@@ -117,26 +117,9 @@ export default function ClassFormPage() {
   return (
     <div className="flex min-h-screen bg-gray-50 text-foreground">
       {/* Sidebar - Giữ nguyên */}
-      <aside className="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col fixed h-full">
-        <div className="p-6 border-b">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-teal-500 rounded-lg flex items-center justify-center text-white">
-              <GraduationCap className="w-6 h-6" />
-            </div>
-            <span className="font-bold">EduAdmin</span>
-          </Link>
-        </div>
-        <nav className="flex-1 p-4">
-          {sidebarItems.map((item) => (
-            <Link key={item.label} href={item.href} className={`flex items-center gap-3 px-4 py-3 rounded-lg mb-1 ${item.active ? "bg-teal-50 text-teal-600" : "hover:bg-gray-100"}`}>
-              <item.icon className="w-5 h-5" />
-              <span className="font-medium">{item.label}</span>
-            </Link>
-          ))}
-        </nav>
-      </aside>
 
-      <main className="flex-1 md:ml-64 p-8">
+
+      <main className="flex-1  p-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm mb-6 text-muted-foreground">
           <Link href="/classes">Classes</Link>
