@@ -34,3 +34,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+git status
+git add .
+git commit -m "Initial commit"
+git push
+
+- Viết lại giao diện phần xem điểm của sinh viên, hiển thị bảng điểm theo học kì ( mỗi học kì 1 bảng ) sắp xếp thời gian từ trên xuống dưới từ hk mới nhất đến hk cũ nhất
+- Thêm 1 cột hiển thị điểm hệ chữ và thêm dòng hiển thị GPA cuối mỗi bảng trong học kì
